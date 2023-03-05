@@ -54,5 +54,8 @@ if uploaded_file:
   
 
    st.table(df)
+    
+
+
    #st.empty()
    #st.dataframe(df,width=800)
