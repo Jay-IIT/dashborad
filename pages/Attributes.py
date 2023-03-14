@@ -2,7 +2,8 @@ import streamlit as st  # pip install streamlit
 import pandas as pd  # pip install pandas
 import numpy as np 
 from streamlit_option_menu import option_menu
- 
+import plotly.graph_objects as go
+
 
 hide_menu_style = """
         <style>
@@ -55,7 +56,23 @@ if uploaded_file:
    except Exception as e:
        pass
   
-
-   st.table(df)
+   fig = go.Figure(data=[go.Table(
+   header=dict(values=[f"<b>{each.upper()}</b>" for each in list(df.columns)],
+                fill_color='paleturquoise',
+                font=dict(color='black', family="Lato", size=15),
+                align='left'),
+   cells=dict(values=df.transpose().values.tolist(),
+               fill_color='lavender',
+               align='left'))
+   ])
+   fig.update_traces(cells_font=dict(size = 12)) 
+   fig.update_layout(
+    autosize=True,
+    width=1200,
+    height=1000,
+     
+    
+)
+   st.write(fig)
    #st.empty()
    #st.dataframe(df,width=800)
